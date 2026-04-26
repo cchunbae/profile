@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>민준배 | ECM & 신기술사업투자조합 담당</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #1a1f35;
+            color: #e2e8f0;
+        }
+
+        .sidebar {
+            background: #232d48;
+            width: 80px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid #2d3e5f;
+        }
+
+        .sidebar-item {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            color: #94a3b8;
+            font-size: 20px;
+        }
+
+        .sidebar-item:hover {
+            background: #3a4a68;
+            color: #f59e0b;
+            transform: scale(1.05);
+        }
+
+        .sidebar-item.active {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 80px;
+            padding: 40px;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2d3e5f;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2d3e5f;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .icon-btn:hover {
+            background: #3a4a68;
+            color: #f59e0b;
+        }
+
+        .cta-button {
+            background: #0f172a;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 24px;
+            border: 1px solid #f59e0b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background: #f59e0b;
+            color: #0f172a;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            max-width: 1400px;
+        }
+
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-card {
+            background: #232d48;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2d3e5f;
+            margin-bottom: 30px;
+        }
+
+        .profile-image-section {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #3a4a68, #2d3e5f);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-image-section::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f59e0b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .profile-info {
+            padding: 24px;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-role {
+            display: inline-block;
+            background: #3a4a68;
+            color: #f59e0b;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .profile-subtitle {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .skill-tag {
+            background: #3a4a68;
+            color: #f59e0b;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #4a5a78;
+        }
+
+        .stat-box {
+            background: #232d48;
+            border: 1px solid #2d3e5f;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.1);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .deals-section {
+            margin-top: 40px;
+        }
+
+        .deals-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .deal-item {
+            background: #232d48;
+            border: 1px solid #2d3e5f;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .deal-item:hover {
+            border-color: #f59e0b;
+            background: #2a3548;
+        }
+
+        .deal-icon {
+            font-size: 32px;
+            min-width: 40px;
+        }
+
+        .deal-content {
+            flex: 1;
+        }
+
+        .deal-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #e2e8f0;
+        }
+
+        .deal-desc {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .circular-progress {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(#f59e0b 0deg, #f59e0b 309.6deg, #3a4a68 309.6deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .circular-progress-inner {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: #232d48;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .progress-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .timeline {
+            background: #232d48;
+            border: 1px solid #2d3e5f;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2d3e5f;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #f59e0b;
+            border-radius: 50%;
+            margin-top: 4px;
+            min-width: 12px;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-year {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .timeline-text {
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        .timeline-org {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 60px;
+            }
+
+            .sidebar-item {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                margin-left: 60px;
+                padding: 20px;
+            }
+
+            .profile-name {
+                font-size: 22px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-item active" title="Profile">👤</div>
+        <div class="sidebar-item" title="Work">💼</div>
+        <div class="sidebar-item" title="Skills">⚙️</div>
+        <div class="sidebar-item" title="Contact">💬</div>
+        <div class="sidebar-item" title="Settings">⚡</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header-nav">
+            <div class="logo">Junbae.MIN</div>
+            <div class="header-actions">
+                <div class="icon-btn" title="Favorite">❤️</div>
+                <div class="icon-btn" title="Bookmark">🔖</div>
+                <button class="cta-button">Get in touch</button>
+            </div>
+        </div>
+
+        <!-- Profile Grid -->
+        <div class="profile-grid">
+            <!-- Left Column -->
+            <div class="profile-left">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-image-section">
+                        <div class="verified-badge">✓ Verified</div>
+                        <div class="profile-avatar">民</div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name">
+                            민준배
+                            <span class="profile-role">Finance</span>
+                        </div>
+                        <div class="profile-subtitle">신기술사업투자조합 & ECM 담당</div>
+
+                        <div class="info-section">
+                            <div class="info-label">Company</div>
+                            <div class="info-value">키움증권 기업성장금융팀</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">kayawn11@gmail.com</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">Seoul, South Korea</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-label">Expertise</div>
+                            <div class="skill-tags">
+                                <div class="skill-tag">ECM</div>
+                                <div class="skill-tag">CB</div>
+                                <div class="skill-tag">Corporate Finance</div>
+                                <div class="skill-tag">M&A</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Deals Section -->
+                <div class="deals-section">
+                    <div class="deals-title">주요 역무</div>
+
+                    <div class="deal-item">
+                        <div class="deal-icon">📈</div>
+                        <div class="deal-content">
+                            <div class="deal-title">공모증자</div>
+                            <div class="deal-desc">IPO 및 유상증자 구조화</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-item">
+                        <div class="deal-icon">💱</div>
+                        <div class="deal-content">
+                            <div class="deal-title">사모 전환사채</div>
+                            <div class="deal-desc">CB 발행 및 구조화</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-item">
+                        <div class="deal-icon">🏦</div>
+                        <div class="deal-content">
+                            <div class="deal-title">기업금융대출</div>
+                            <div class="deal-desc">운영자금 및 설비투자</div>
+                        </div>
+                    </div>
+
+                    <div class="deal-item">
+                        <div class="deal-icon">🚀</div>
+                        <div class="deal-content">
+                            <div class="deal-title">신기술사업투자조합</div>
+                            <div class="deal-desc">프로젝트/블라인드 투자</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Career Timeline -->
+                <div class="timeline">
+                    <div class="timeline-title">Career Timeline</div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2021 – 현재</div>
+                            <div class="timeline-text">키움증권</div>
+                            <div class="timeline-org">기업성장금융팀 · 신기술사업투자조합 & ECM 담당</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2018 – 2021</div>
+                            <div class="timeline-text">삼성증권</div>
+                            <div class="timeline-org">여의도지점</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2012 – 2018</div>
+                            <div class="timeline-text">서울시립대학교</div>
+                            <div class="timeline-org">경영학과 졸업</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Stats -->
+            <div class="profile-right">
+                <div class="stat-box">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Successful Deals</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">$100B+</div>
+                    <div class="stat-label">Deal Volume</div>
+                </div>
+
+                <!-- Expertise Score -->
+                <div class="stat-box">
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Expertise Score</div>
+                    <div class="circular-progress">
+                        <div class="circular-progress-inner">
+                            <div class="progress-value">92</div>
+                            <div class="progress-label">Expert</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Matrix -->
+                <div class="stat-box">
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 20px; text-align: left;">Core Competencies</div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="font-size: 13px; color: #e2e8f0;">공모증자</span>
+                                <span style="font-size: 13px; color: #f59e0b;">95%</span>
+                            </div>
+                            <div style="width: 100%; height: 6px; background: #3a4a68; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 95%; height: 100%; background: linear-gradient(90deg, #f59e0b, #f97316);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="font-size: 13px; color: #e2e8f0;">기업금융</span>
+                                <span style="font-size: 13px; color: #f59e0b;">92%</span>
+                            </div>
+                            <div style="width: 100%; height: 6px; background: #3a4a68; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 92%; height: 100%; background: linear-gradient(90deg, #f59e0b, #f97316);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="font-size: 13px; color: #e2e8f0;">신기술투자</span>
+                                <span style="font-size: 13px; color: #f59e0b;">88%</span>
+                            </div>
+                            <div style="width: 100%; height: 6px; background: #3a4a68; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 88%; height: 100%; background: linear-gradient(90deg, #f59e0b, #f97316);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Sidebar active state
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Heart button animation
+        document.querySelector('.icon-btn').addEventListener('click', function() {
+            this.textContent = this.textContent === '❤️' ? '🤍' : '❤️';
+            this.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
