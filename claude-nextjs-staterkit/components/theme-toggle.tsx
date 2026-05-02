@@ -1,6 +1,6 @@
 'use client'
 
-import { Moon, Sun, Monitor } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/app/providers'
 import { Button } from './button'
 import { useEffect, useState } from 'react'
@@ -15,7 +15,7 @@ export function ThemeToggle() {
 
   // 마운트 전에는 렌더링하지 않음
   if (!mounted) {
-    return <div className='w-32 h-10' />
+    return <div className='w-20 h-10' />
   }
 
   return (
@@ -28,16 +28,6 @@ export function ThemeToggle() {
         title='라이트 모드'
       >
         <Sun className='w-4 h-4' />
-      </Button>
-
-      <Button
-        size='sm'
-        variant={theme === 'system' ? 'primary' : 'ghost'}
-        onClick={() => setTheme('system')}
-        className='!bg-transparent hover:!bg-gray-200 dark:hover:!bg-gray-700'
-        title='시스템 설정'
-      >
-        <Monitor className='w-4 h-4' />
       </Button>
 
       <Button

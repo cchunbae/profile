@@ -55,7 +55,7 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 bg-gray-50 dark:bg-gray-900/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8'>
+        <section className='w-full bg-gray-50 dark:bg-gray-900/50 py-20 sm:py-32'>
           <div className='max-w-7xl mx-auto'>
             <div className='text-center mb-16'>
               <h2 className='text-3xl sm:text-4xl font-bold'>주요 기능</h2>
@@ -102,7 +102,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className='border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50'>
+      <footer className='w-full border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
           <div className='text-center text-sm text-gray-600 dark:text-gray-400'>
             <p>&copy; 2024 Next.js Starter Kit. MIT 라이센스로 공개되었습니다.</p>
