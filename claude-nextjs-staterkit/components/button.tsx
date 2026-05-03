@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'icon'
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -25,6 +25,7 @@ export function Button({
           'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700': variant === 'secondary',
           'border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800': variant === 'outline',
           'hover:bg-gray-100 dark:hover:bg-gray-800': variant === 'ghost',
+          'hover:bg-gray-200 dark:hover:bg-gray-700': variant === 'icon',
         },
         {
           'h-8 px-3 text-sm': size === 'sm',

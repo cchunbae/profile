@@ -15,32 +15,38 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
-  // 초기 테마 로드
+  // 초기 테마 로드 및 DOM 적용
   useEffect(() => {
     const savedTheme = (localStorage.getItem('theme') as Theme) || 'light'
-    setThemeState(savedTheme)
-    applyTheme(savedTheme)
-    setMounted(true)
-  }, [])
-
-  // 테마 변경 시 DOM 업데이트
-  useEffect(() => {
-    if (!mounted) return
-    applyTheme(theme)
-  }, [theme, mounted])
-
-  const applyTheme = (newTheme: Theme) => {
     const html = document.documentElement
-    if (newTheme === 'dark') {
+    if (savedTheme === 'dark') {
       html.classList.add('dark')
     } else {
       html.classList.remove('dark')
     }
-    localStorage.setItem('theme', newTheme)
-  }
+    // 상태 업데이트는 배치로 처리됨
+    queueMicrotask(() => {
+      setThemeState(savedTheme)
+      setMounted(true)
+    })
+  }, [])
+
+  // 테마 변경 시 DOM 업데이트 및 저장
+  useEffect(() => {
+    if (!mounted) return
+    const html = document.documentElement
+    if (theme === 'dark') {
+      html.classList.add('dark')
+    } else {
+      html.classList.remove('dark')
+    }
+    localStorage.setItem('theme', theme)
+  }, [theme, mounted])
 
   const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme)
+    if (newTheme !== theme) {
+      setThemeState(newTheme)
+    }
   }
 
   return (

@@ -10,7 +10,7 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    setMounted(true)
+    queueMicrotask(() => setMounted(true))
   }, [])
 
   // 마운트 전에는 렌더링하지 않음
@@ -22,9 +22,8 @@ export function ThemeToggle() {
     <div className='flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1'>
       <Button
         size='sm'
-        variant={theme === 'light' ? 'primary' : 'ghost'}
+        variant={theme === 'light' ? 'primary' : 'icon'}
         onClick={() => setTheme('light')}
-        className='!bg-transparent hover:!bg-gray-200 dark:hover:!bg-gray-700'
         title='라이트 모드'
       >
         <Sun className='w-4 h-4' />
@@ -32,9 +31,8 @@ export function ThemeToggle() {
 
       <Button
         size='sm'
-        variant={theme === 'dark' ? 'primary' : 'ghost'}
+        variant={theme === 'dark' ? 'primary' : 'icon'}
         onClick={() => setTheme('dark')}
-        className='!bg-transparent hover:!bg-gray-200 dark:hover:!bg-gray-700'
         title='다크 모드'
       >
         <Moon className='w-4 h-4' />

@@ -4,7 +4,11 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --skip-install --eslint --app)",
       "Bash(npm install *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "WebSearch",
+      "Bash(npm update *)",
+      "Bash(npm audit *)",
+      "Bash(npm run *)"
     ]
   }
 }

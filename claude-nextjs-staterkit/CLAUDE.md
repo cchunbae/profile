@@ -14,7 +14,7 @@ npm run lint     # ESLint 실행
 ## 프로젝트 아키텍처
 
 ### 기술 스택
-- **Next.js 15** (App Router)
+- **Next.js 16** (App Router)
 - **React 19**
 - **TypeScript** 5+
 - **TailwindCSS v4** (PostCSS 기반, 별도 설정 파일 불필요)

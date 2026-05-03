@@ -1,5 +1,3 @@
-'use client'
-
 import { Header } from '@/components/header'
 import { Button } from '@/components/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
@@ -8,7 +6,7 @@ import { ArrowRight, Code2, Palette, Zap } from 'lucide-react'
 
 const features = [
   {
-    title: 'Next.js 15 App Router',
+    title: 'Next.js 16 App Router',
     description: '최신 Next.js 버전의 App Router를 사용하여 빠른 성능과 최적화된 개발 경험을 제공합니다.',
     icon: Zap,
   },
@@ -40,7 +38,7 @@ export default function Home() {
               빠르게 시작하세요
             </h1>
             <p className='mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
-              Next.js v15, TypeScript, TailwindCSS v4, shadcn/ui, 그리고 lucide-react로 구성된 완벽한 스타터 킷으로 프로젝트를 시작하세요.
+              Next.js v16, TypeScript, TailwindCSS v4, shadcn/ui, 그리고 lucide-react로 구성된 완벽한 스타터 킷으로 프로젝트를 시작하세요.
             </p>
             <div className='mt-10 flex flex-col sm:flex-row gap-4 justify-center'>
               <Button size='lg' variant='primary'>
@@ -105,7 +103,7 @@ export default function Home() {
       <footer className='w-full border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
           <div className='text-center text-sm text-gray-600 dark:text-gray-400'>
-            <p>&copy; 2024 Next.js Starter Kit. MIT 라이센스로 공개되었습니다.</p>
+            <p>&copy; {new Date().getFullYear()} Next.js Starter Kit. MIT 라이센스로 공개되었습니다.</p>
           </div>
         </div>
       </footer>
